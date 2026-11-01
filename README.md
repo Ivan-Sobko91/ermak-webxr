@@ -12,8 +12,9 @@
 
 ## 🚀 Демонстрация (Live Demo)
 
-- Основная страница приложения: `https://<ваш-логин>.github.io/<имя-репозитория>/index.html`
-- Альтернативный путь: `https://<ваш-логин>.github.io/<имя-репозитория>/webxr_app/index.html`
+- 📱 **Основная страница приложения:** [https://ivan-sobko91.github.io/ermak-webxr/index.html](https://ivan-sobko91.github.io/ermak-webxr/index.html)
+- 🚆 **Прямой адрес (структура примера курсовой):** [https://ivan-sobko91.github.io/ermak-webxr/webxr_app/index.html](https://ivan-sobko91.github.io/ermak-webxr/webxr_app/index.html)
+- 📦 **Репозиторий GitHub:** [https://github.com/Ivan-Sobko91/ermak-webxr](https://github.com/Ivan-Sobko91/ermak-webxr)
 
 ---
 
