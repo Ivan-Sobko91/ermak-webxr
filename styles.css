@@ -1,0 +1,640 @@
+:root {
+    --rzd-red: #E21A1A;
+    --rzd-red-hover: #c41313;
+    --rzd-dark: #141619;
+    --rzd-grey: #26292e;
+    --rzd-light-grey: #8c929a;
+    --rzd-white: #f5f6f8;
+    --rzd-yellow: #f5a623;
+    --glass-bg: rgba(20, 22, 27, 0.82);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-main);
+    background-color: var(--rzd-dark);
+    color: var(--rzd-white);
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: radial-gradient(circle at 50% 20%, #1f232b 0%, #0d0e12 100%);
+}
+
+/* -----------------------------------------------------------
+   ШАПКА (HEADER)
+----------------------------------------------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 20;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.rzd-badge {
+    background: var(--rzd-red);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 6px 14px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(226, 26, 26, 0.4);
+}
+
+.title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 0.78rem;
+    color: var(--rzd-light-grey);
+    margin-top: 2px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: var(--rzd-red);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(226, 26, 26, 0.35);
+}
+
+.btn-primary:hover {
+    background: var(--rzd-red-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--rzd-white);
+    border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+/* -----------------------------------------------------------
+   VIEWER CONTAINER И GOOGLE MODEL VIEWER
+----------------------------------------------------------- */
+.viewer-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+    outline: none;
+}
+
+/* Индикатор загрузки прогресс-бара */
+.progress-bar-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    padding: 24px 32px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    z-index: 10;
+}
+
+.progress-bar-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--rzd-white);
+}
+
+.progress-bar-track {
+    width: 220px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rzd-red), #ff6b6b);
+    transition: width 0.2s ease;
+}
+
+/* -----------------------------------------------------------
+   ХОТСПОТЫ (ИНФО-ТОЧКИ)
+----------------------------------------------------------- */
+.hotspot {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    pointer-events: auto;
+}
+
+.hotspot-pin {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--rzd-red);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 4px rgba(226, 26, 26, 0.4), 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pinPulse 2s infinite;
+}
+
+.hotspot:hover .hotspot-pin {
+    transform: scale(1.35);
+    background: #ff3b30;
+}
+
+@keyframes pinPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(226, 26, 26, 0.6), 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(226, 26, 26, 0), 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(226, 26, 26, 0), 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+}
+
+.hotspot-card {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    width: 240px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    text-align: left;
+}
+
+.hotspot:hover .hotspot-card,
+.hotspot:focus .hotspot-card,
+.hotspot.active .hotspot-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.hotspot-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(226, 26, 26, 0.4);
+    padding-bottom: 4px;
+}
+
+.hotspot-desc {
+    font-size: 0.76rem;
+    line-height: 1.35;
+    color: #d1d5db;
+}
+
+/* Скрытие хотспотов по кнопке */
+.hotspots-hidden .hotspot {
+    display: none !important;
+}
+
+/* Кнопка AR для мобильных устройств (управляется model-viewer) */
+.default-ar-btn {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    background: var(--rzd-red);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 22px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(226, 26, 26, 0.5);
+    cursor: pointer;
+    z-index: 15;
+    transition: all 0.2s ease;
+}
+.default-ar-btn:hover {
+    background: var(--rzd-red-hover);
+    transform: scale(1.04);
+}
+
+/* -----------------------------------------------------------
+   НИЖНЯЯ ПАНЕЛЬ БЫСТРЫХ РАКУРСОВ (CAMERA BAR)
+----------------------------------------------------------- */
+.camera-bar {
+    position: absolute;
+    bottom: 46px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--card-shadow);
+    z-index: 10;
+}
+
+.camera-bar-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--rzd-light-grey);
+    white-space: nowrap;
+}
+
+.camera-buttons {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+}
+
+.cam-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    color: var(--rzd-white);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.cam-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.cam-btn.active {
+    background: var(--rzd-red);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(226, 26, 26, 0.4);
+}
+
+/* -----------------------------------------------------------
+   ПЛАВАЮЩИЕ ИНСТРУМЕНТЫ (CONTROLS PANEL)
+----------------------------------------------------------- */
+.controls-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+}
+
+.tool-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    color: var(--rzd-white);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateX(-2px);
+}
+
+.tool-btn.active {
+    border-color: rgba(226, 26, 26, 0.6);
+    background: rgba(226, 26, 26, 0.25);
+    color: #fff;
+}
+
+/* -----------------------------------------------------------
+   БОКОВАЯ ПАНЕЛЬ ТТХ (INFO DRAWER)
+----------------------------------------------------------- */
+.info-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100%;
+    background: rgba(18, 20, 24, 0.94);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.drawer-header h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--rzd-light-grey);
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.drawer-content {
+    padding: 20px 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.specs-badge {
+    display: inline-block;
+    background: rgba(226, 26, 26, 0.15);
+    border: 1px solid rgba(226, 26, 26, 0.4);
+    color: #ff6b6b;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-bottom: 24px;
+}
+
+.specs-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.specs-table td {
+    padding: 10px 4px;
+}
+
+.specs-table td:first-child {
+    color: var(--rzd-light-grey);
+    width: 50%;
+}
+
+.specs-table td:last-child {
+    font-weight: 500;
+    text-align: right;
+}
+
+.student-info {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+/* -----------------------------------------------------------
+   МОДАЛЬНОЕ ОКНО AR
+----------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    background: var(--rzd-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-body p {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-bottom: 16px;
+    line-height: 1.45;
+}
+
+.qr-container {
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.qr-container svg {
+    display: block;
+}
+
+.ar-requirements {
+    font-size: 0.76rem;
+    color: var(--rzd-light-grey);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+.ar-requirements span {
+    color: #a7f3d0;
+}
+
+/* -----------------------------------------------------------
+   ПОДВАЛ (FOOTER)
+----------------------------------------------------------- */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px;
+    background: var(--glass-bg);
+    border-top: 1px solid var(--glass-border);
+    font-size: 0.72rem;
+    color: var(--rzd-light-grey);
+    z-index: 20;
+}
+
+.footer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4cd964;
+    box-shadow: 0 0 8px #4cd964;
+}
+
+/* -----------------------------------------------------------
+   АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ
+----------------------------------------------------------- */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 14px;
+    }
+    .subtitle {
+        display: none;
+    }
+    .camera-bar {
+        bottom: 40px;
+        width: 92%;
+        padding: 6px 10px;
+    }
+    .camera-bar-title {
+        display: none;
+    }
+    .controls-panel {
+        top: 65px;
+        right: 12px;
+    }
+    .info-drawer {
+        width: 100%;
+    }
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Электровоз 3ЭС5К «Ермак» | WebXR 3D Model Viewer</title>
+    <!-- Google Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Шапка приложения -->
+        <header class="header">
+            <div class="logo-group">
+                <div class="rzd-badge">РЖД</div>
+                <div>
+                    <h1 class="title">Электровоз 3ЭС5К «Ермак»</h1>
+                    <p class="subtitle">Интерактивный WebXR 3D-демонстратор | ДВГУПС Кафедра ЦТИГ</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="hornBtn" class="btn btn-secondary" title="Подать звуковой сигнал тифона">
+                    <span class="icon">📢</span> Тифон (Гудок)
+                </button>
+                <button id="toggleInfoBtn" class="btn btn-secondary" title="Технические характеристики">
+                    <span class="icon">📋</span> ТТХ
+                </button>
+                <button id="arLaunchBtn" class="btn btn-primary" title="Просмотр в дополненной реальности">
+                    <span class="icon">📱</span> Режим AR
+                </button>
+            </div>
+        </header>
+
+        <!-- Главная 3D сцена Model Viewer -->
+        <main class="viewer-container">
+            <model-viewer
+                id="ermakViewer"
+                src="models/ermak_3es5k.glb"
+                poster="assets/preview_ermak.png"
+                alt="3D модель электровоза 3ЭС5К «Ермак» в ливрее ОАО «РЖД»"
+                auto-rotate
+                auto-rotate-delay="3000"
+                rotation-per-second="18deg"
+                camera-controls
+                touch-action="pan-y"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                ar-scale="auto"
+                ar-placement="floor"
+                camera-orbit="45deg 75deg 18m"
+                camera-target="0m 2.2m 0m"
+                field-of-view="35deg"
+                min-camera-orbit="auto auto 4m"
+                max-camera-orbit="auto auto 32m"
+                shadow-intensity="1.5"
+                shadow-softness="0.7"
+                exposure="1.05">
+
+                <!-- Индикатор загрузки -->
+                <div slot="progress-bar" class="progress-bar-container">
+                    <div class="progress-bar-label">Загрузка 3D-модели «Ермак»...</div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Хотспот 1: Кабина машиниста -->
+                <button class="hotspot" slot="hotspot-cab" 
+                        data-position="0m 3.2m 6.6m" 
+                        data-normal="0m 0.35m 0.93m"
+                        data-orbit="25deg 78deg 8m"
+                        data-target="0m 2.8m 5.5m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Кабина машиниста</div>
+                        <div class="hotspot-desc">Каркасно-панельная конструкция с климат-контролем, эргономичным пультом и микропроцессорной системой МСУД-Н. Оснащена комплексами безопасности КЛУБ-У и САУТ-ЦМ/485.</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 2: Токоприемник (пантограф) -->
+                <button class="hotspot" slot="hotspot-panto" 
+                        data-position="0m 5.7m -1.3m" 
+                        data-normal="0m 0.5m 0.86m"
+                        data-orbit="-40deg 60deg 7m"
+                        data-target="0m 4.8m -1.8m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Токоприемник ТАсС-10</div>
+                        <div class="hotspot-desc">Асимметричный полупантограф с пневмоприводом для съема переменного тока напряжением 25 кВ (50 Гц) с контактного провода. Угольные контактные вставки полоза.</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 3: Ходовая тележка и тяговый привод -->
+                <button class="hotspot" slot="hotspot-bogie" 
+                        data-position="1.25m 0.85m 3.8m" 
+                        data-normal="0.95m 0.1m 0.25m"
+                        data-orbit="95deg 82deg 6m"
+                        data-target="0m 0.8m 3.8m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Двухосная тележка</div>
+                        <div class="hotspot-desc">Колесная формула 2(2₀-2₀). Индивидуальный привод с коллекторными двигателями НБ-514Б (835 кВт каждый). Опорно-осевое подвешивание двигателей, пружины «Флексикойл», диаметр колес 1250 мм.</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 4: Автосцепка СА-3 -->
+                <button class="hotspot" slot="hotspot-coupler" 
+                        data-position="0m 1.05m 7.9m" 
+                        data-normal="0m 0.1m 0.99m"
+                        data-orbit="0deg 85deg 5m"
+                        data-target="0m 1.1m 7.2m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Автосцепка СА-3 и метельник</div>
+                        <div class="hotspot-desc">Автоматическое сцепное устройство нежесткого типа с эластомерным поглощающим аппаратом. Ниже — метельник для очистки путей и концевые рукава тормозной магистрали.</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 5: Световые приборы -->
+                <button class="hotspot" slot="hotspot-lights" 
+                        data-position="0m 4.3m 6.3m" 
+                        data-normal="0m 0.2m 0.98m"
+                        data-orbit="10deg 75deg 6m"
+                        data-target="0m 3.6m 6.0m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Осветительный комплекс</div>
+                        <div class="hotspot-desc">Верхний светодиодный прожектор дальнего/ближнего света в козырьке кабины и спаренные буферные фонари (белые ходовые и красные сигнальные огни).</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 6: Крышевой выключатель ВОВ-25А -->
+                <button class="hotspot" slot="hotspot-vov" 
+                        data-position="0m 4.7m 0.75m" 
+                        data-normal="0m 0.9m 0.4m"
+                        data-orbit="-75deg 65deg 6m"
+                        data-target="0m 4.4m 0.8m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Выключатель ВОВ-25А</div>
+                        <div class="hotspot-desc">Высоковольтный воздушный однополюсный выключатель. Служит для оперативных включений и автоматического отключения электровоза при аварийных токах короткого замыкания.</div>
+                    </div>
+                </button>
+
+                <!-- Кнопка AR по умолчанию для мобильных браузеров -->
+                <button slot="ar-button" class="default-ar-btn">
+                    👋 Посмотреть в вашей комнате (AR)
+                </button>
+            </model-viewer>
+
+            <!-- Нижняя плавающая панель управления ракурсами камеры -->
+            <nav class="camera-bar">
+                <div class="camera-bar-title">Быстрые ракурсы:</div>
+                <div class="camera-buttons">
+                    <button class="cam-btn active" data-orbit="45deg 75deg 18m" data-target="0m 2.2m 0m">Общий вид</button>
+                    <button class="cam-btn" data-orbit="15deg 80deg 7m" data-target="0m 2.8m 5.8m">Кабина</button>
+                    <button class="cam-btn" data-orbit="-40deg 60deg 7m" data-target="0m 4.8m -1.8m">Пантограф</button>
+                    <button class="cam-btn" data-orbit="95deg 82deg 6m" data-target="0m 0.8m 3.8m">Тележка</button>
+                    <button class="cam-btn" data-orbit="0deg 85deg 5m" data-target="0m 1.1m 7.2m">Сцепка СА-3</button>
+                    <button class="cam-btn" data-orbit="-125deg 75deg 15m" data-target="0m 2.5m -2.0m">Борт РЖД</button>
+                </div>
+            </nav>
+
+            <!-- Плавающая панель настроек отображения -->
+            <aside class="controls-panel">
+                <button id="toggleRotateBtn" class="tool-btn active" title="Автоматическое вращение 360°">
+                    <span class="icon">🔄</span> Вращение
+                </button>
+                <button id="toggleHotspotsBtn" class="tool-btn active" title="Показать/скрыть инфо-точки">
+                    <span class="icon">📍</span> Аннотации
+                </button>
+                <button id="toggleLightBtn" class="tool-btn" title="Переключить свет (День / Ночь)">
+                    <span class="icon">☀️</span> Свет
+                </button>
+                <button id="resetCamBtn" class="tool-btn" title="Сброс положения камеры">
+                    <span class="icon">🎯</span> Сброс
+                </button>
+                <button id="fullscreenBtn" class="tool-btn" title="Полноэкранный режим">
+                    <span class="icon">⛶</span> Полный экран
+                </button>
+            </aside>
+        </main>
+
+        <!-- Боковая панель ТТХ (сворачиваемая) -->
+        <aside id="infoDrawer" class="info-drawer">
+            <div class="drawer-header">
+                <h3>Характеристики 3ЭС5К «Ермак»</h3>
+                <button id="closeInfoBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="drawer-content">
+                <div class="specs-badge">Магистральный грузовой электровоз переменного тока</div>
+                <table class="specs-table">
+                    <tr><td>Завод-изготовитель:</td><td>НЭВЗ (Новочеркасск)</td></tr>
+                    <tr><td>Род тока и напряжение:</td><td>Однофазный ~25 кВ, 50 Гц</td></tr>
+                    <tr><td>Осевая формула секции:</td><td>2₀ - 2₀ (двухосные тележки)</td></tr>
+                    <tr><td>Составность:</td><td>3 секции (головная + бустерная + головная)</td></tr>
+                    <tr><td>Мощность часового режима:</td><td><strong>9 840 кВт</strong> (13 380 л.с.)</td></tr>
+                    <tr><td>Мощность секции:</td><td>3 280 кВт</td></tr>
+                    <tr><td>Сила тяги при трогании:</td><td><strong>1 058 кН</strong> (107.8 тс)</td></tr>
+                    <tr><td>Конструкционная скорость:</td><td>110 км/ч</td></tr>
+                    <tr><td>Масса секции / общая:</td><td>96 т / 288 т</td></tr>
+                    <tr><td>Диаметр колеса:</td><td>1 250 мм</td></tr>
+                    <tr><td>Ширина колеи:</td><td>1 520 мм</td></tr>
+                    <tr><td>Тяговые двигатели:</td><td>12 × НБ-514Б</td></tr>
+                    <tr><td>Полигонаж 3D-модели:</td><td><strong style="color: #4cd964;">8 020 Tris</strong> (норматив 5k-50k)</td></tr>
+                </table>
+                <div class="student-info">
+                    <strong>Дисциплина:</strong> Моделирование VR/AR<br>
+                    <strong>Университет:</strong> ДВГУПС, Хабаровск<br>
+                    <strong>Кафедра:</strong> Цифровые технологии и инженерная графика<br>
+                    <strong>Руководитель:</strong> асс. Д.В. Гладкий
+                </div>
+            </div>
+        </aside>
+
+        <!-- Модальное окно для запуска AR на смартфоне -->
+        <div id="arModal" class="modal-overlay">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Просмотр «Ермака» в AR</h3>
+                    <button id="closeArModalBtn" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Наведите камеру смартфона на QR-код для запуска электровоза в вашей комнате или на улице в масштабе 1:1 или 1:20:</p>
+                    <div class="qr-container">
+                        <!-- Динамический SVG QR код -->
+                        <div id="qrCodeContainer"></div>
+                    </div>
+                    <div class="ar-requirements">
+                        <span>✓ Поддержка Android (ARCore / Google Scene Viewer)</span><br>
+                        <span>✓ Поддержка iPhone / iPad (Apple ARKit / Quick Look)</span>
+                    </div>
+                    <button id="directArBtn" class="btn btn-primary btn-block">
+                        Активировать AR прямо сейчас
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <footer class="footer">
+            <span>Курсовая работа · Вариант А: WebXR & Google Model Viewer · 2026</span>
+            <span class="footer-status"><span class="status-dot"></span> 3D-модель оптимизирована (PBR glTF/GLB)</span>
+        </footer>
+    </div>
+
+    <!-- Скрипт логики приложения -->
+    <script src="app.js"></script>
+</body>
+</html>
