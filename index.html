@@ -54,8 +54,8 @@
                 camera-orbit="45deg 75deg 18m"
                 camera-target="0m 2.52m 0m"
                 field-of-view="35deg"
-                min-camera-orbit="auto auto 4m"
-                max-camera-orbit="auto auto 32m"
+                min-camera-orbit="auto auto 1.2m"
+                max-camera-orbit="auto auto 35m"
                 shadow-intensity="1.5"
                 shadow-softness="0.7"
                 exposure="1.05">
@@ -146,6 +146,32 @@
                     </div>
                 </button>
 
+                <!-- Хотспот 7: Интерьер кабины и пульт МСУД-Н / КЛУБ-У -->
+                <button class="hotspot" slot="hotspot-interior" 
+                        data-position="0.45m 2.75m 5.8m" 
+                        data-normal="0m 0.3m -0.95m"
+                        data-orbit="15deg 80deg 3.5m"
+                        data-target="0.3m 2.7m 5.6m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Интерьер кабины: пульт МСУД-Н и КЛУБ-У</div>
+                        <div class="hotspot-desc">Эргономичный пульт с цветным монитором МСУД-Н (синяя индикация параметров тяги), блоком КЛУБ-У/БИЛ (зеленая шкала скорости и сигналов АЛСН), стрелочными манометрами, контроллером КМ-35, кранами машиниста № 395/215 и регулируемыми креслами с подголовниками.</div>
+                    </div>
+                </button>
+
+                <!-- Хотспот 8: Задний межсекционный переход и суфле -->
+                <button class="hotspot" slot="hotspot-gangway" 
+                        data-position="0m 2.5m -7.4m" 
+                        data-normal="0m 0m -1m"
+                        data-orbit="180deg 80deg 6.0m"
+                        data-target="0m 2.3m -7.4m">
+                    <div class="hotspot-pin"></div>
+                    <div class="hotspot-card">
+                        <div class="hotspot-title">Межсекционный переход и суфле</div>
+                        <div class="hotspot-desc">Герметичное резиновое уплотнительное суфле, откидной металлический мостик над сцепкой СА-3, гибкие высоковольтные и низковольтные кабели-жоксы межсекционных соединений, концевые рукава пневмомагистралей и красные буферные сигналы.</div>
+                    </div>
+                </button>
+
                 <!-- Кнопка AR по умолчанию для мобильных браузеров -->
                 <button slot="ar-button" class="default-ar-btn">
                     👋 Посмотреть в вашей комнате (AR)
@@ -157,7 +183,9 @@
                 <div class="camera-bar-title">Быстрые ракурсы:</div>
                 <div class="camera-buttons">
                     <button class="cam-btn active" data-orbit="45deg 75deg 18m" data-target="0m 2.2m 0m">Общий вид</button>
-                    <button class="cam-btn" data-orbit="15deg 80deg 7m" data-target="0m 2.8m 5.8m">Кабина</button>
+                    <button class="cam-btn" data-orbit="15deg 80deg 3.5m" data-target="0.3m 2.7m 5.6m">Интерьер кабины</button>
+                    <button class="cam-btn" data-orbit="180deg 80deg 6.0m" data-target="0m 2.3m -7.4m">Задний торец / Сцепка</button>
+                    <button class="cam-btn" data-orbit="15deg 80deg 7m" data-target="0m 2.8m 5.8m">Кабина снаружи</button>
                     <button class="cam-btn" data-orbit="-40deg 60deg 7m" data-target="0m 4.8m -1.8m">Пантограф</button>
                     <button class="cam-btn" data-orbit="95deg 82deg 6m" data-target="0m 0.8m 3.8m">Тележка</button>
                     <button class="cam-btn" data-orbit="0deg 85deg 5m" data-target="0m 1.1m 7.2m">Сцепка СА-3</button>
